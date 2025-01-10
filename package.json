@@ -3,7 +3,7 @@
   "displayName": "BoMarkdown Color Theme",
   "description": "Color theme and associated grammar for BoMarkdown syntax",
   "icon": "images/ExtensionIcon.png",
-  "version": "0.0.2",
+  "version": "0.1.1",
   "publisher": "antpri",
   "engines": {
   "vscode": "^1.96.0"
@@ -16,6 +16,9 @@
     "Themes",
     "Snippets"
   ],
+  "scripts": {
+    "postinstall": "node postinstall.js"
+},
   "contributes": {
     "themes": [
       {
