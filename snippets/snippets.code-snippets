@@ -1,0 +1,30 @@
+{
+    "InsertEffectivityExpression": {
+        "prefix": "(e:",
+        "body": [
+            "(e:${1|[Jalon1 ->Jalon2],[Jalon1 ->oo[|})"
+        ],
+        "description": "Insert a close or open sample effectivity expression"
+    },
+    "InsertStatus": {
+        "prefix": "(s:",
+        "body": [
+            "(s:${1|D,IW,F,R,O|})"
+        ],
+        "description": "Insert a status key from bomarkdown.status"
+    },
+    "InsertBubbles": {
+        "prefix": "(b:",
+        "body": [
+            "(b:${1|matrice,context,lock,unlock,noway,mastership3DX,mastershipSLW,mastershipAVEVA,mastershipREVIT|})"
+        ],
+        "description": "Insert a bubble key from bomarkdown.bubbles"
+    },
+    "InsertLinks": {
+        "prefix": "(l:",
+        "body": [
+            "(l:${1|h,implem,classif,deriv,docspec,projection,output,scope,assign,capable,flow,time,position|})"
+        ],
+        "description": "Insert a link key from bomarkdown.linksdefinition"
+    }
+}
