@@ -1,0 +1,29 @@
+{
+  "name": "bomarkdown-color-theme",
+  "displayName": "BoMarkdown Color Theme",
+  "description": "Color theme and associated grammar for BoMarkdown syntax",
+  "version": "0.0.1",
+  "publisher": "antprin",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "BoMarkdown Color Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/bomarkdown-color-theme.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "markdown",
+        "scopeName": "source.bomarkdowngrammar",
+        "path": "./syntaxes/bomarkdown-grammar.json"
+      }
+    ]
+  }
+}
