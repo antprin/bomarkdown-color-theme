@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 
 // Chemin vers le script Python dans le dossier 'snippets'
-const pythonScriptPath = path.join(__dirname, 'snippets', 'generate_snippets.py');
+const pythonScriptPath = path.join(__dirname, 'generate_snippets.py');
 
 // Chemin vers le fichier de log
 const logFilePath = path.join(__dirname, 'postinstall.log');
