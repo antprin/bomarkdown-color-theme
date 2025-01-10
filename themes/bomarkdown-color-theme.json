@@ -1,0 +1,48 @@
+{
+	"name": "BoMarkdown Color Theme",
+	"include": "./dark_plus.json",
+	"tokenColors": [
+        {
+            "name": "Red text inside (b:...) )",
+            "scope": "entity.name.custom.b",
+            "settings": {
+            "foreground": "#8D5A97"
+            }
+        },
+        {
+            "name": "Red text inside (e:...) )",
+            "scope": "entity.name.custom.e",
+            "settings": {
+            "foreground": "#F15152"
+            }
+        },
+		{
+            "name": "Red text inside (i:...) )",
+            "scope": "entity.name.custom.i",
+            "settings": {
+            "foreground": "#F49F0A"
+            }
+        },
+		{
+            "name": "Red text inside (s:...) )",
+            "scope": "entity.name.custom.s",
+            "settings": {
+            "foreground": "#9FD356"
+            }
+        },
+        {
+            "name": "Red text inside (a:...) )",
+            "scope": "entity.name.custom.a",
+            "settings": {
+            "foreground": "#00CECB"
+            }
+        },
+        {
+            "name": "Red text inside (l:...) )",
+            "scope": "entity.name.custom.l",
+            "settings": {
+            "foreground": "#246EB9"
+            }
+        }
+    ]
+}
