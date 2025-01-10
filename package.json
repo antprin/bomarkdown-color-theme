@@ -4,7 +4,7 @@
   "description": "Color theme and associated grammar for BoMarkdown syntax",
   "icon": "images/ExtensionIcon.png",
   "version": "0.0.1",
-  "publisher": "antprin",
+  "publisher": "antpri",
   "engines": {
   "vscode": "^1.96.0"
   },
