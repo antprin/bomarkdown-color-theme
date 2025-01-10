@@ -10,12 +10,12 @@ This extension :
 Example : 
 
 
-![alt text](./src/image2.png)
+![alt text](./images/ReadmeImage2.png)
 
 
 By default :
 
 
-![alt text](./src/image1.png)
+![alt text](./images/ReadmeImage1.png)
 
 "# bomarkdown-color-theme" 

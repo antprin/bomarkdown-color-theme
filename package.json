@@ -2,10 +2,15 @@
   "name": "bomarkdown-color-theme",
   "displayName": "BoMarkdown Color Theme",
   "description": "Color theme and associated grammar for BoMarkdown syntax",
+  "icon": "images/ExtensionIcon.png",
   "version": "0.0.1",
   "publisher": "antprin",
   "engines": {
-    "vscode": "^1.96.0"
+  "vscode": "^1.96.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antprin/bomarkdown-color-theme.git"
   },
   "categories": [
     "Themes"
