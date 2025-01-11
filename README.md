@@ -11,22 +11,22 @@ This extension :
 
 Theme "BoMarkdown Color Theme" added in Themes Menu (Ctrl K + Ctrl T) : 
 
-![alt text](./images/ThemesMenu.png)
+![alt text](./src/images/ThemesMenu.png)
 
 
 
 Example : 
 
 
-![alt text](./images/ReadmeImage2.png)
+![alt text](./src/images/ReadmeImage2.png)
 
 By default :
 
 
-![alt text](./images/ReadmeImage1.png)
+![alt text](./src/images/ReadmeImage1.png)
 
 ***
 
-![alt text](./images/ReadmeImage3.png)
+![alt text](./src/images/ReadmeImage3.png)
 
 "# bomarkdown-color-theme" 

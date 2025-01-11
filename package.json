@@ -6,7 +6,7 @@
   "version": "0.1.1",
   "publisher": "antpri",
   "engines": {
-  "vscode": "^1.96.0"
+    "vscode": "^1.96.0"
   },
   "repository": {
     "type": "git",
@@ -16,28 +16,25 @@
     "Themes",
     "Snippets"
   ],
-  "scripts": {
-    "postinstall": "node postinstall.js"
-},
   "contributes": {
     "themes": [
       {
         "label": "BoMarkdown Color Theme",
         "uiTheme": "vs-dark",
-        "path": "./themes/bomarkdown-color-theme.json"
+        "path": "./src/themes/bomarkdown-color-theme.json"
       }
     ],
     "grammars": [
       {
         "language": "markdown",
         "scopeName": "source.bomarkdowngrammar",
-        "path": "./syntaxes/bomarkdown-grammar.json"
+        "path": "./src/syntaxes/bomarkdown-grammar.json"
       }
     ],
     "snippets": [
       {
         "language": "markdown",
-        "path": "./snippets/snippets.code-snippets"
+        "path": "./src/snippets/snippets.code-snippets"
       }
     ]
   }
