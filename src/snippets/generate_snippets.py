@@ -99,4 +99,4 @@ existing_snippets.update(dynamic_snippets)
 with open(snippets_path, 'w', encoding='utf-8') as snippets_file:
     json.dump(existing_snippets, snippets_file, ensure_ascii=False, indent=4)
 
-print('Snippets generated successfully.')
+print('>>> Snippets generated successfully in', snippets_path)
