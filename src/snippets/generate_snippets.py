@@ -1,102 +1,107 @@
 import os
 import json
 
-# Chemin vers le fichier settings.json de l'utilisateur
-settings_path = os.path.join(os.path.expanduser('~'), 'AppData', 'Roaming', 'Code', 'User', 'settings.json')
 
-# Chemin vers le fichier snippets.code-snippets dans le dossier src/snippets de l'extension
-snippets_path = os.path.join(os.path.dirname(__file__), 'snippets.code-snippets')
+def get_vscode_paths():
+    """Retourne les chemins principaux de VS Code selon l'OS."""
+    if os.name == 'nt':  # Windows
+        user_settings = os.path.join(os.getenv('APPDATA', ''), 'Code', 'User', 'settings.json')
+        extensions_path = os.path.join(os.getenv('USERPROFILE', ''), '.vscode', 'extensions')
+    else:  # MacOS/Linux
+        user_settings = os.path.join(os.path.expanduser('~'), '.config', 'Code', 'User', 'settings.json')
+        extensions_path = os.path.join(os.path.expanduser('~'), '.vscode', 'extensions')
+    return user_settings, extensions_path
 
-# Chemin vers le dossier extensions de Visual Studio Code
-vscode_extensions_path = os.path.join(os.path.expanduser('~'), '.vscode', 'extensions')
-icon_config_file = None
 
-# Trouver le dossier de l'extension utilisateur qui commence par 'roeperni.bomarkdown'
-for item in os.listdir(vscode_extensions_path):
-    if item.startswith('roeperni.bomarkdown'):
-        icon_config_file = os.path.join(vscode_extensions_path, item, 'IconConfig', 'UserIcons.json')
-        break
+def find_file(extension_path, extension_name, target_file):
+    """Recherche un fichier spécifique dans une extension VSC donnée."""
+    for root, _, files in os.walk(extension_path):
+        if extension_name in root and target_file in files:
+            return os.path.join(root, target_file)
+    return None
 
-# Lire le fichier settings.json
-with open(settings_path, 'r', encoding='utf-8') as f:
-    settings = json.load(f)
 
-# Fonction pour extraire les clés d'une entrée spécifique
-def extract_keys(entry_key):
-    entries = settings.get(entry_key, {})
-    return list(entries.keys())
+def load_json_file(file_path):
+    """Charge le contenu d'un fichier JSON s'il existe."""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError) as e:
+        print(f"Erreur lors du chargement du fichier {file_path} : {e}")
+        return {}
 
-# Extraire les clés des entrées spécifiques
-satus_keys = extract_keys('bomarkdown.satus')
-bubbles_keys = extract_keys('bomarkdown.bubbles')
-linksdefinition_keys = extract_keys('bomarkdown.Linksdefinition')
 
-# Afficher les clés
-print('satus keys:', satus_keys)
-print('bubbles keys:', bubbles_keys)
-print('linksdefinition keys:', linksdefinition_keys)
-
-# Fonction pour extraire les clés 'name' du fichier UserIcons.json
-def extract_icon_names(icon_config_file):
-    if icon_config_file and os.path.exists(icon_config_file):
-        with open(icon_config_file, 'r', encoding='utf-8') as f:
-            icon_config = json.load(f)
-            return [icon['name'] for icon in icon_config]
-    return []
-
-# Extraire les noms des icônes
-icon_names = extract_icon_names(icon_config_file)
-print('icon names:', icon_names)
-
-# Déclaration en dur des snippets non customisables
-static_snippets = {
-    "InsertEffectivityExpression": {
-        "prefix": "(e:",
-        "body": [
-            "(e:${1|[Jalon1 ->Jalon2],[Jalon1 ->oo[|}"
-        ],
-        "description": "Insert a close or open sample effectivity expression"
-    },
-    "InsertAlias": {
-        "prefix": "(a:",
-        "body": [
-            "(a:"
-        ],
-        "description": "Insert an alias key"
-    }
-}
-
-# Fonction pour générer des snippets dynamiques
-def generate_dynamic_snippet(prefix, keys, description):
+def generate_snippet(prefix, keys, description):
+    """Génère un snippet dynamique."""
     return {
         "prefix": prefix,
-        "body": [
-            f"{prefix}${{1|{','.join(keys)}|}}"
-        ],
-        "description": description
+        "body": [f"{prefix}${{1|{','.join(keys)}|}}"],
+        "description": description,
     }
 
-# Générer le contenu des snippets customisables par l'utilisateur
-dynamic_snippets = {
-    "InsertStatus": generate_dynamic_snippet("(s:", satus_keys, "Insert a status key from bomarkdown.status"),
-    "InsertBubbles": generate_dynamic_snippet("(b:", bubbles_keys, "Insert a bubble key from bomarkdown.bubbles"),
-    "InsertLinks": generate_dynamic_snippet("(l:", linksdefinition_keys, "Insert a link key from bomarkdown.linksdefinition"),
-    "InsertIcons": generate_dynamic_snippet("(i:", icon_names, "Insert an icon name from UserIcons.json")
-}
 
-# Lire le contenu existant du fichier snippets.code-snippets
-if os.path.exists(snippets_path):
-    with open(snippets_path, 'r', encoding='utf-8') as snippets_file:
-        existing_snippets = json.load(snippets_file)
-else:
-    existing_snippets = {}
+def main():
+    # Obtenir les chemins principaux
+    user_settings_path, extensions_path = get_vscode_paths()
 
-# Mettre à jour le contenu existant avec les snippets statiques et dynamiques
-existing_snippets.update(static_snippets)
-existing_snippets.update(dynamic_snippets)
+    # Charger le fichier settings.json
+    settings = load_json_file(user_settings_path)
+    if not settings:
+        print("Impossible de charger les paramètres utilisateur du settings.json.")
+        return
 
-# Écrire le contenu mis à jour dans le fichier snippets.code-snippets
-with open(snippets_path, 'w', encoding='utf-8') as snippets_file:
-    json.dump(existing_snippets, snippets_file, ensure_ascii=False, indent=4)
+    # Extraire les clés des paramètres spécifiques
+    status_keys = settings.get("bomarkdown.status", {}).keys()
+    bubbles_keys = settings.get("bomarkdown.bubbles", {}).keys()
+    links_keys = settings.get("bomarkdown.Linksdefinition", {}).keys()
 
-print('>>> Snippets generated successfully in', snippets_path)
+    # Trouver le fichier UserIcons.json
+    extension_name = "bomarkdown"
+    target_file = "UserIcons.json"
+    user_icons_path = find_file(extensions_path, extension_name, target_file)
+
+    # Charger les icônes si le fichier existe
+    icon_names = []
+    if user_icons_path:
+        icon_data = load_json_file(user_icons_path)
+        icon_names = [icon.get('name', '') for icon in icon_data if 'name' in icon]
+
+    # Générer les snippets dynamiques
+    dynamic_snippets = {
+        "InsertStatus": generate_snippet("(s:", status_keys, "Insert a status key from bomarkdown.status"),
+        "InsertBubbles": generate_snippet("(b:", bubbles_keys, "Insert a bubble key from bomarkdown.bubbles"),
+        "InsertLinks": generate_snippet("(l:", links_keys, "Insert a link key from bomarkdown.Linksdefinition"),
+        "InsertIcons": generate_snippet("(i:", icon_names, "Insert an icon name from UserIcons.json"),
+    }
+
+    # Déclaration des snippets statiques
+    static_snippets = {
+        "InsertEffectivityExpression": {
+            "prefix": "(e:",
+            "body": ["(e:${1|[Jalon1 ->Jalon2],[Jalon1 ->oo[|}"],
+            "description": "Insert a close or open sample effectivity expression",
+        },
+        "InsertAlias": {
+            "prefix": "(a:",
+            "body": ["(a:"],
+            "description": "Insert an alias key",
+        },
+    }
+
+    # Chemin du fichier snippets
+    snippets_path = os.path.join(os.path.dirname(__file__), 'snippets.code-snippets')
+
+    # Charger et mettre à jour les snippets existants
+    existing_snippets = load_json_file(snippets_path)
+    existing_snippets.update(static_snippets)
+    existing_snippets.update(dynamic_snippets)
+
+    # Sauvegarder les snippets mis à jour
+    with open(snippets_path, 'w', encoding='utf-8') as f:
+        json.dump(existing_snippets, f, ensure_ascii=False, indent=4)
+
+    print(f">>> Snippets générés avec succès dans {snippets_path}")
+
+
+if __name__ == "__main__":
+    main()
