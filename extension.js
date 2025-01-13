@@ -24,6 +24,10 @@ function activate(context) {
             }
             vscode.window.showInformationMessage('Snippets generated successfully!');
             console.log(`Sortie: ${stdout}`);
+
+            // Exécuter la commande workbench.action.reloadWindow (pour refresh les snippets sinon il faut redémarrer VSC)
+            vscode.commands.executeCommand('workbench.action.reloadWindow');
+            console.log(">>> Executed command: workbench.action.reloadWindow");
         });
     });
 

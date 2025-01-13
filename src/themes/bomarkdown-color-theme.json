@@ -6,42 +6,42 @@
             "name": "Red text inside (b:...) )",
             "scope": "entity.name.custom.b",
             "settings": {
-            "foreground": "#8D5A97"
+            "foreground": "#8F74B8"
             }
         },
         {
             "name": "Red text inside (e:...) )",
             "scope": "entity.name.custom.e",
             "settings": {
-            "foreground": "#F15152"
+            "foreground": "#F36F70"
             }
         },
 		{
             "name": "Red text inside (i:...) )",
             "scope": "entity.name.custom.i",
             "settings": {
-            "foreground": "#F49F0A"
+            "foreground": "#569CD6"
             }
         },
 		{
             "name": "Red text inside (s:...) )",
             "scope": "entity.name.custom.s",
             "settings": {
-            "foreground": "#9FD356"
+            "foreground": "#6a9955"
             }
         },
         {
             "name": "Red text inside (a:...) )",
             "scope": "entity.name.custom.a",
             "settings": {
-            "foreground": "#00CECB"
+            "foreground": "#dcce80"
             }
         },
         {
             "name": "Red text inside (l:...) )",
             "scope": "entity.name.custom.l",
             "settings": {
-            "foreground": "#246EB9"
+            "foreground": "#CE9178"
             }
         }
     ]

@@ -4,6 +4,8 @@ All notable changes to the "bomarkdown-color-theme" extension will be documented
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
-## [Unreleased]
+## [Releases]
 
-- Initial release
+- 0.1.2: Release automating window refresh after snippets generation + change colors palette for theme
+- 0.1.1: Release including snippets
+- 0.0.1: Initial color theme release

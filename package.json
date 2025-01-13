@@ -1,9 +1,9 @@
 {
   "name": "bomarkdown-color-theme",
   "displayName": "BoMarkdown Theme & Snippets",
-  "description": "Color theme, associated grammar and snippets for BoMarkdown extension",
+  "description": "Color theme, grammar and snippets for BoMarkdown extension",
   "icon": "src/images/ExtensionIcon.png",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "publisher": "antpri",
   "engines": {
     "vscode": "^1.96.0"
